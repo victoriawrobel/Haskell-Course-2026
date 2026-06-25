@@ -1,0 +1,22 @@
+sheet {
+  -- 1. Division by Zero (#DIV/0!)
+  A1 = 10 / 0;
+
+  -- 2. Type mismatch errors (#VALUE!)
+  A2 = TRUE + 5;
+  A3 = "hello" - "world";
+
+  -- 3. Missing reference error (evaluates to ErrV)
+  A4 = Z99 + 1;
+
+  -- 4. Propagation of errors through binary operations
+  A5 = A1 + 10;
+  A6 = 20 * A2;
+  A7 = A4 ^ 2;
+
+  -- 5. Propagation of errors through range operations
+  B1 = 100;
+  B2 = B1 + 100;
+  -- SUM of A1:B2 contains A1 which is an error, so it should propagate the error (#DIV/0!)
+  B3 = SUM(A1:B2);
+}

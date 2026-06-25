@@ -1,0 +1,24 @@
+sheet {
+  -- Numeric literals
+  A1 = 5;
+  A2 = 2;
+
+  -- Arithmetic operators
+  A3 = A1 + A2;
+  A4 = A1 - A2;
+  A5 = A1 * A2;
+  A6 = A1 / A2;
+  A7 = A1 ^ A2;
+
+  -- Comparison operators
+  A8 = A1 == 5;
+  A9 = A1 < A2;
+  B1 = A1 > A2;
+
+  -- Range operators
+  B2 = SUM(A3:A7);
+  B3 = AVG(A3:A7);
+  B4 = MIN(A3:A7);
+  B5 = MAX(A3:A7);
+  B6 = COUNT(A3:A7);
+}

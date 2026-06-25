@@ -1,0 +1,29 @@
+sheet {
+  -- Numbers
+  A1 = 3.14159;
+  A2 = -42;
+
+  -- Booleans
+  B1 = TRUE;
+  B2 = FALSE;
+
+  -- Strings
+  C1 = "hello";
+  C2 = "world";
+  C3 = "hello";
+
+  -- Comparisons on different types
+  D1 = B1 == TRUE;         // True
+  D2 = B1 == B2;           // False
+  D3 = C1 == C3;           // True
+  D4 = C1 == C2;           // False
+  D5 = A1 == 3.14159;      // True
+
+  -- Comparisons of mismatched types evaluate to FALSE safely
+  E1 = A1 == B1;           -- False
+  E2 = C1 == A2;           -- False
+
+  -- Arithmetic on non-numeric types produces #VALUE! errors
+  E3 = A1 + B1;            -- #VALUE!
+  E4 = C1 * 2;             -- #VALUE!
+}

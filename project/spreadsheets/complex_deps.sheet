@@ -1,0 +1,25 @@
+sheet {
+  -- Base inputs
+  A1 = 10;
+  A2 = 20;
+  A3 = 30;
+  A4 = 40;
+
+  -- Layer 1 dependencies (simple references)
+  B1 = A1 + A2;            -- 30.0
+  B2 = A2 + A3;            -- 50.0
+  B3 = A3 + A4;            -- 70.0
+
+  -- Layer 2 dependencies (range operations on Layer 1)
+  C1 = SUM(B1:B3);         -- 150.0
+  C2 = AVG(B1:B2);         -- 40.0
+
+  -- Layer 3 dependencies (deep dependency chain)
+  D1 = C1 * 2;             -- 300.0
+  D2 = D1 - C2;            -- 260.0
+
+  -- Parallel section computing statistics over all cells in a 2x4 grid
+  E1 = MIN(A1:D2);         -- 10.0
+  E2 = MAX(A1:D2);         -- 300.0
+  E3 = COUNT(A1:D2);       -- 8.0
+}

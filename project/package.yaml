@@ -26,6 +26,7 @@ dependencies:
 - containers
 - hspec
 - QuickCheck
+- directory
 
 ghc-options:
 - -Wall

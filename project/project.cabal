@@ -13,7 +13,6 @@ author:         Author name here
 maintainer:     example@example.com
 copyright:      2026 Author name here
 license:        BSD-3-Clause
-license-file:   LICENSE
 build-type:     Simple
 extra-source-files:
     README.md
@@ -42,6 +41,7 @@ library
       QuickCheck
     , base >=4.7 && <5
     , containers
+    , directory
     , hspec
     , megaparsec
     , parser-combinators
@@ -60,6 +60,7 @@ executable project-exe
       QuickCheck
     , base >=4.7 && <5
     , containers
+    , directory
     , hspec
     , megaparsec
     , parser-combinators
@@ -84,6 +85,7 @@ test-suite project-test
       QuickCheck
     , base >=4.7 && <5
     , containers
+    , directory
     , hspec
     , megaparsec
     , parser-combinators

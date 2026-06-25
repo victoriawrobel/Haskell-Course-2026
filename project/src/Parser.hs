@@ -42,7 +42,7 @@ pValue = lexeme (pBool <|> pNum <|> pStr)
   where
     pBool = (BoolV True <$ symbol "TRUE") <|> (BoolV False <$ symbol "FALSE")
     pStr = StrV <$> (char '"' *> manyTill L.charLiteral (char '"'))
-    pNum = NumV <$> L.signed sc (try L.float <|> (fromIntegral <$> L.decimal))
+    pNum = NumV <$> L.signed sc (try L.float <|> (fromIntegral <$> (L.decimal :: Parser Integer)))
 
 parens :: Parser a -> Parser a
 parens = between (symbol "(") (symbol ")")

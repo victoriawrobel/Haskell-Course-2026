@@ -49,7 +49,13 @@ parens = between (symbol "(") (symbol ")")
 
 pRangeOpExpr :: Parser Expr
 pRangeOpExpr = do
-  op <- (SumR <$ symbol "SUM") <|> (AvgR <$ symbol "AVG")
+  op <- choice
+    [ SumR <$ symbol "SUM"
+    , AvgR <$ symbol "AVG"
+    , MinR <$ symbol "MIN"
+    , MaxR <$ symbol "MAX"
+    , CountR <$ symbol "COUNT"
+    ]
   _ <- symbol "("
   start <- pAddr
   _ <- symbol ":"
@@ -67,11 +73,16 @@ pTerm = choice
 
 operators :: [[Operator Parser Expr]]
 operators =
-  [ [ InfixL (BinOp Mul <$ symbol "*")
+  [ [ InfixR (BinOp Pow <$ symbol "^") ]
+  , [ InfixL (BinOp Mul <$ symbol "*")
     , InfixL (BinOp Div <$ symbol "/")
     ]
   , [ InfixL (BinOp Add <$ symbol "+")
     , InfixL (BinOp Sub <$ symbol "-")
+    ]
+  , [ InfixL (BinOp EqOp <$ symbol "==")
+    , InfixL (BinOp LtOp <$ symbol "<")
+    , InfixL (BinOp GtOp <$ symbol ">")
     ]
   ]
 

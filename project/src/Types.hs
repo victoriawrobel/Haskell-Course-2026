@@ -21,8 +21,8 @@ data Value
   | ErrV String 
   deriving (Show, Eq, Ord)
 
-data Op = Add | Sub | Mul | Div deriving (Show, Eq, Ord)
-data RangeOp = SumR | AvgR deriving (Show, Eq, Ord)
+data Op = Add | Sub | Mul | Div | Pow | EqOp | LtOp | GtOp deriving (Show, Eq, Ord)
+data RangeOp = SumR | AvgR | MinR | MaxR | CountR deriving (Show, Eq, Ord)
 
 data Expr
   = Ref Addr

@@ -80,3 +80,25 @@ spec = describe "End-to-End Correctness" $ do
           Map.lookup ("A", 1) newEnv `shouldBe` Just (NumV 50)
           Map.lookup ("B", 1) newEnv `shouldBe` Just (NumV 100)
           Map.lookup ("B", 2) newEnv `shouldBe` Just (NumV 150)
+
+  it "evaluates the operators.sheet example file correctly" $ do
+    sheetStr <- readFile "spreadsheets/operators.sheet"
+    case parseSheet sheetStr of
+      Left err -> expectationFailure err
+      Right sheet -> do
+        let env = evalSheet sheet
+        Map.lookup ("A", 1) env `shouldBe` Just (NumV 5.0)
+        Map.lookup ("A", 2) env `shouldBe` Just (NumV 2.0)
+        Map.lookup ("A", 3) env `shouldBe` Just (NumV 7.0)
+        Map.lookup ("A", 4) env `shouldBe` Just (NumV 3.0)
+        Map.lookup ("A", 5) env `shouldBe` Just (NumV 10.0)
+        Map.lookup ("A", 6) env `shouldBe` Just (NumV 2.5)
+        Map.lookup ("A", 7) env `shouldBe` Just (NumV 25.0)
+        Map.lookup ("A", 8) env `shouldBe` Just (BoolV True)
+        Map.lookup ("A", 9) env `shouldBe` Just (BoolV False)
+        Map.lookup ("B", 1) env `shouldBe` Just (BoolV True)
+        Map.lookup ("B", 2) env `shouldBe` Just (NumV 47.5)
+        Map.lookup ("B", 3) env `shouldBe` Just (NumV 9.5)
+        Map.lookup ("B", 4) env `shouldBe` Just (NumV 2.5)
+        Map.lookup ("B", 5) env `shouldBe` Just (NumV 25.0)
+        Map.lookup ("B", 6) env `shouldBe` Just (NumV 5.0)

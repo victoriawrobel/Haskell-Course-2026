@@ -87,3 +87,19 @@ spec = describe "Evaluator Correctness" $ do
         Map.lookup ("A", 3) env `shouldBe` Just (ErrV "cycle")
         Map.lookup ("B", 1) env `shouldBe` Just (ErrV "cycle")
         Map.lookup ("B", 2) env `shouldBe` Just (ErrV "cycle")
+
+  it "computes correct topological order for an acyclic sheet" $ do
+    let sheetStr = unlines
+          [ "sheet {"
+          , "  A3 = A2 * 2;"
+          , "  A1 = 10;"
+          , "  A2 = A1 + 5;"
+          , "}"
+          ]
+    case parseSheet sheetStr of
+      Left err -> expectationFailure err
+      Right sheet -> do
+        let (acyclicOrder, cycles) = findCyclesAndOrder sheet
+        cycles `shouldBe` []
+        acyclicOrder `shouldBe` [("A", 1), ("A", 2), ("A", 3)]
+
